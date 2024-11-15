@@ -21,6 +21,8 @@ export const AppDetailPage = lazy(() => import('src/pages/app/detail'));
 export const AppCreatePage = lazy(() => import('src/pages/app/create'));
 export const General = lazy(() => import('src/pages/app/detail/general'));
 export const SEO = lazy(() => import('src/pages/app/detail/seo'));
+export const Configuration = lazy(() => import('src/pages/app/detail/configuration'));
+export const Git = lazy(() => import('src/pages/app/detail/git'));
 
 // ----------------------------------------------------------------------
 
@@ -59,6 +61,8 @@ export function Router() {
           children: [
             { path: '/apps/:id/general', element: <General /> },
             { path: '/apps/:id/seo', element: <SEO /> },
+            { path: '/apps/:id/configuration', element: <Configuration /> },
+            { path: '/apps/:id/git', element: <Git /> },
           ],
         },
         { path: 'apps/create', element: <AppCreatePage /> },

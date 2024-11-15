@@ -1,5 +1,4 @@
-import { Editor } from '@monaco-editor/react';
-import { FormHelperText } from '@mui/material';
+import { FormControlLabel, FormHelperText, Switch } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -9,8 +8,9 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import PlatformSelect from 'src/components/App/PlatformSelect';
 
-const SEOForm = () => {
+const ConfigurationForm = () => {
   const a = 12;
   return (
     <Box
@@ -33,27 +33,22 @@ const SEOForm = () => {
     >
       <Card>
         <CardContent>
-          <Typography variant="h4"> Meta Tag</Typography>
+          <Typography variant="h4"> Configuration </Typography>
           <FormHelperText>
-            meta tags are elements in the HTML of a webpage that provide metadata (data about data)
-            to search engines and other web services. Meta tags are not visible on the page itself,
-            but they can be crucial for search engines to understand the content of the page and how
-            it should be indexed or displayed in search results.
+            These configurations can vary widely depending on the type of app but commonly include
+            settings for user preferences, permissions, display options, and other customization
+            features.
           </FormHelperText>
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <Grid container mt={1} spacing={2}>
                 <Grid item xs={12}>
-                  <Box component="p"> Meta Title </Box>
-                  <TextField fullWidth variant="outlined" placeholder="E.g. Your-app | Company©" />
+                  <Box component="p">Platform </Box>
+                  <PlatformSelect />
                 </Grid>
                 <Grid item xs={12}>
-                  <Box component="p"> Meta Description </Box>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    placeholder="E.g. This is a description to describe your app and relevant to SEO"
-                  />
+                  <Box component="p">App Url </Box>
+                  <TextField fullWidth variant="outlined" placeholder="E.g. https://my-app.com" />
                 </Grid>
               </Grid>
             </Grid>
@@ -65,21 +60,21 @@ const SEOForm = () => {
       </Card>
       <Card>
         <CardContent>
-          <Typography variant="h4"> Advanced Meta Tags </Typography>
+          <Typography variant="h4"> Public </Typography>
           <FormHelperText>
-            You can integrate the JSON to enable advanced meta tags on your website for enhanced SEO
-            and social media sharing.
+            A public app generally refers to a software application that is made available to the
+            public for use, typically without restrictions on who can access it.
           </FormHelperText>
-          <Box mt={2}>
-            <Editor height="400px" defaultLanguage="json" />
-          </Box>
+
+          <FormControlLabel
+            control={<Switch defaultChecked />}
+            label="Enabled"
+            sx={{ mt: 2, mb: 2 }}
+          />
         </CardContent>
-        <CardActions className="actions">
-          <Button variant="contained"> Save </Button>
-        </CardActions>
       </Card>
     </Box>
   );
 };
 
-export default React.memo(SEOForm);
+export default React.memo(ConfigurationForm);

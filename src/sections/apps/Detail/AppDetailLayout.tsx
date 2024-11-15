@@ -51,10 +51,10 @@ const AppDetailLayout = () => {
               <ListItemText primary="SEO" />
             </ListItemButton>
             <ListItemButton
-              selected={checkActiveMenu('technical')}
-              onClick={(event) => handleListItemClick(event, 'technical')}
+              selected={checkActiveMenu('configuration')}
+              onClick={(event) => handleListItemClick(event, 'configuration')}
             >
-              <ListItemText primary="Technical" />
+              <ListItemText primary="Configuration" />
             </ListItemButton>
           </List>
           <List
