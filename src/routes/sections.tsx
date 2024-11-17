@@ -7,6 +7,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { varAlpha } from 'src/theme/styles';
 import { AuthLayout } from 'src/layouts/auth';
 import { DashboardLayout } from 'src/layouts/dashboard';
+import { AppLayout } from 'src/layouts/app';
 
 // ----------------------------------------------------------------------
 
@@ -56,8 +57,20 @@ export function Router() {
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'apps', element: <AppPage /> },
+        { path: 'apps/create', element: <AppCreatePage /> },
+      ],
+    },
+    {
+      element: (
+        <AppLayout>
+          <Suspense fallback={renderFallback}>
+            <Outlet />
+          </Suspense>
+        </AppLayout>
+      ),
+      children: [
         {
-          path: 'apps/:id',
+          path: '/apps/:id/',
           element: <AppDetailPage />,
           children: [
             { path: '/apps/:id/general', element: <General /> },
@@ -67,7 +80,6 @@ export function Router() {
             { path: '/apps/:id/deployment', element: <Deployment /> },
           ],
         },
-        { path: 'apps/create', element: <AppCreatePage /> },
       ],
     },
     {

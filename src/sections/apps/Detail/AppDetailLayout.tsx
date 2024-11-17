@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { DashboardContent } from 'src/layouts/dashboard';
-import { List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
+import { Button, List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const AppDetailLayout = () => {
   const location = useLocation();
@@ -20,8 +21,19 @@ const AppDetailLayout = () => {
   };
   const checkActiveMenu = (menu: string) => location.pathname.split('/').at(-1) === menu;
 
+  useEffect(() => {
+    if (location.pathname.split(`/apps/${id}/`).length === 1) {
+      navigate(`/apps/${id}/general`);
+    }
+  }, [id, location.pathname, navigate]);
+
   return (
     <DashboardContent>
+      <Box mb={2} mt={2}>
+        <Button startIcon={<KeyboardBackspaceIcon />} onClick={() => navigate('/')}>
+          Go back to dashboard
+        </Button>
+      </Box>
       <Box display="flex" alignItems="center" mb={5}>
         <Typography variant="h4" flexGrow={1}>
           Name of App
