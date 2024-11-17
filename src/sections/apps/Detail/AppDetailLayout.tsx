@@ -69,16 +69,10 @@ const AppDetailLayout = () => {
               <ListItemText primary="Git" />
             </ListItemButton>
             <ListItemButton
-              selected={checkActiveMenu('deployemnt')}
+              selected={checkActiveMenu('deployment')}
               onClick={(event) => handleListItemClick(event, 'deployment')}
             >
               <ListItemText primary="Deployment" />
-            </ListItemButton>
-            <ListItemButton
-              selected={checkActiveMenu('logs')}
-              onClick={(event) => handleListItemClick(event, 'logs')}
-            >
-              <ListItemText primary="Logs" />
             </ListItemButton>
           </List>
         </Grid>

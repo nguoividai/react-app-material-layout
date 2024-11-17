@@ -23,6 +23,7 @@ export const General = lazy(() => import('src/pages/app/detail/general'));
 export const SEO = lazy(() => import('src/pages/app/detail/seo'));
 export const Configuration = lazy(() => import('src/pages/app/detail/configuration'));
 export const Git = lazy(() => import('src/pages/app/detail/git'));
+export const Deployment = lazy(() => import('src/pages/app/detail/deployment'));
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +64,7 @@ export function Router() {
             { path: '/apps/:id/seo', element: <SEO /> },
             { path: '/apps/:id/configuration', element: <Configuration /> },
             { path: '/apps/:id/git', element: <Git /> },
+            { path: '/apps/:id/deployment', element: <Deployment /> },
           ],
         },
         { path: 'apps/create', element: <AppCreatePage /> },

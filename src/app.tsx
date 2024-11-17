@@ -1,4 +1,5 @@
 import 'src/global.css';
+import 'src/styles/index.scss';
 
 import Fab from '@mui/material/Fab';
 

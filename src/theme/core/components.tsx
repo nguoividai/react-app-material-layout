@@ -155,6 +155,17 @@ const MuiRadio: Components<Theme>['MuiRadio'] = {
   },
 };
 
+const MuiMenuList: Components<Theme>['MuiMenuList'] = {
+  styleOverrides: {
+    root: {
+      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Custom box-shadow
+      '&:hover': {
+        boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.3)', // Stronger shadow on hover
+      },
+    },
+  },
+};
+
 // ----------------------------------------------------------------------
 
 export const components = {
@@ -170,4 +181,5 @@ export const components = {
   MuiCardHeader,
   MuiOutlinedInput,
   MuiFormControlLabel,
+  MuiMenuList,
 };

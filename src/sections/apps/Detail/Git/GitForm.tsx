@@ -13,36 +13,35 @@ import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import React from 'react';
 
 const GitForm = () => {
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 }];
-  const columns: GridColDef<(typeof rows)[number]>[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
+  const rows = [
     {
-      field: 'firstName',
-      headerName: 'First name',
-      width: 150,
-      editable: true,
+      id: 'sha256:128c0c93ff871d08b1e2dc736e7fdcaaab86c6b40dc1e2fd53fe235ee68d8ea3',
+      tag: 'v1',
+      created: '15/11/2024',
+    },
+    {
+      id: 'sha256:128c0c93ff871d08b1e2dc736e7fdcaaab86c6b40dc1e2fd53fe235ee68d8ea4',
+      tag: 'v2',
+      created: '16/11/2024',
+    },
+    {
+      id: 'sha256:128c0c93ff871d08b1e2dc736e7fdcaaab86c6b40dc1e2fd53fe235ee68d8ea5',
+      tag: 'v3',
+      created: '17/11/2024',
+    },
+  ];
+  const columns: GridColDef<(typeof rows)[number]>[] = [
+    { field: 'id', headerName: 'ID', width: 300 },
+    {
+      field: 'tag',
+      headerName: 'Tag',
+      width: 100,
       flex: 1,
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
+      field: 'created',
+      headerName: 'Created',
       width: 150,
-      editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
     },
   ];
   return (
@@ -98,6 +97,7 @@ const GitForm = () => {
               rows={rows}
               columns={columns}
               pageSizeOptions={[10]}
+              getRowId={(row) => row.id}
               checkboxSelection
               disableRowSelectionOnClick
               disableColumnFilter
