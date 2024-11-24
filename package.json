@@ -30,6 +30,7 @@
     "@fontsource-variable/dm-sans": "^5.0.7",
     "@fontsource/barlow": "^5.0.14",
     "@iconify/react": "^5.0.2",
+    "@melloware/react-logviewer": "^6.0.3",
     "@monaco-editor/react": "^4.6.0",
     "@mui/icons-material": "^6.1.6",
     "@mui/lab": "^5.0.0-alpha.173",

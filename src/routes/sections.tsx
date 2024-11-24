@@ -20,11 +20,19 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export const AppPage = lazy(() => import('src/pages/app'));
 export const AppDetailPage = lazy(() => import('src/pages/app/detail'));
 export const AppCreatePage = lazy(() => import('src/pages/app/create'));
+export const AppContainerPage = lazy(() => import('src/pages/app/container'));
+
 export const General = lazy(() => import('src/pages/app/detail/general'));
 export const SEO = lazy(() => import('src/pages/app/detail/seo'));
 export const Configuration = lazy(() => import('src/pages/app/detail/configuration'));
 export const Git = lazy(() => import('src/pages/app/detail/git'));
 export const Deployment = lazy(() => import('src/pages/app/detail/deployment'));
+
+export const GeneralContainer = lazy(() => import('src/pages/app/container/general'));
+export const EnvironmentVariablesContainer = lazy(
+  () => import('src/pages/app/container/environmentVariables')
+);
+export const LogsContainer = lazy(() => import('src/pages/app/container/logs'));
 
 // ----------------------------------------------------------------------
 
@@ -78,6 +86,15 @@ export function Router() {
             { path: '/apps/:id/configuration', element: <Configuration /> },
             { path: '/apps/:id/git', element: <Git /> },
             { path: '/apps/:id/deployment', element: <Deployment /> },
+          ],
+        },
+        {
+          path: '/apps/container/:id/',
+          element: <AppContainerPage />,
+          children: [
+            { path: 'general', element: <GeneralContainer /> },
+            { path: 'environment-variables', element: <EnvironmentVariablesContainer /> },
+            { path: 'logs', element: <LogsContainer /> },
           ],
         },
       ],
