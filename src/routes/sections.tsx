@@ -23,6 +23,7 @@ export const AppCreatePage = lazy(() => import('src/pages/app/create'));
 export const AppContainerPage = lazy(() => import('src/pages/app/container'));
 export const Pos = lazy(() => import('src/pages/pos'));
 export const Dishes = lazy(() => import('src/pages/dishes'));
+export const ManageTable = lazy(() => import('src/pages/manage-table'));
 
 export const General = lazy(() => import('src/pages/app/detail/general'));
 export const SEO = lazy(() => import('src/pages/app/detail/seo'));
@@ -70,6 +71,7 @@ export function Router() {
         { path: 'apps/create', element: <AppCreatePage /> },
         { path: 'pos', element: <Pos /> },
         { path: 'dishes', element: <Dishes /> },
+        { path: 'manage-table', element: <ManageTable /> },
       ],
     },
     {
