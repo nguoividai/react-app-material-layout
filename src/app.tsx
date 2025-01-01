@@ -10,17 +10,23 @@ import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 import { ThemeProvider } from 'src/theme/theme-provider';
 
 import { Iconify } from 'src/components/iconify';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
   useScrollToTop();
 
+  useEffect(() => {
+    console.log('Cookies: ', Cookies.get('accessToken'));
+  }, []);
+
   const githubButton = (
     <Fab
       size="medium"
       aria-label="Github"
-      href="https://github.com/minimal-ui-kit/material-kit-react"
+      href="https://github.com/nguoividai"
       sx={{
         zIndex: 9,
         right: 20,

@@ -12,17 +12,20 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useRouter } from 'src/routes/hooks';
 
 import { Iconify } from 'src/components/iconify';
+import login from 'src/services/auth/services/login';
 
 // ----------------------------------------------------------------------
 
 export function SignInView() {
   const router = useRouter();
+  const [username, setUsername] = useState<string>('hello@gmail.com');
+  const [password, setPassword] = useState<string>('@demo1234');
 
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+    login({ username, password });
+  }, [username, password]);
 
   const renderForm = (
     <Box display="flex" flexDirection="column" alignItems="flex-end">
@@ -30,9 +33,10 @@ export function SignInView() {
         fullWidth
         name="email"
         label="Email address"
-        defaultValue="hello@gmail.com"
+        defaultValue={username}
         InputLabelProps={{ shrink: true }}
         sx={{ mb: 3 }}
+        onBlur={(e) => setUsername(e.target.value)}
       />
 
       <Link variant="body2" color="inherit" sx={{ mb: 1.5 }}>
@@ -43,7 +47,7 @@ export function SignInView() {
         fullWidth
         name="password"
         label="Password"
-        defaultValue="@demo1234"
+        defaultValue={password}
         InputLabelProps={{ shrink: true }}
         type={showPassword ? 'text' : 'password'}
         InputProps={{
@@ -56,6 +60,7 @@ export function SignInView() {
           ),
         }}
         sx={{ mb: 3 }}
+        onBlur={(e) => setPassword(e.target.value)}
       />
 
       <LoadingButton
