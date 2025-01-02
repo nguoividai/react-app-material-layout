@@ -9,6 +9,7 @@ import ListView from 'src/components/list-view';
 import useTable from 'src/hooks/use-table';
 import { Button } from '@mui/material';
 import { Iconify } from 'src/components/iconify';
+import { useNavigate } from 'react-router-dom';
 
 const generateData = () => {
   const data = [];
@@ -30,6 +31,7 @@ const mockData = generateData();
 function TestView() {
   const [searchValue, setSearchValue] = useState<string | undefined>('');
   const table = useTable();
+  const navigate = useNavigate();
 
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -97,6 +99,7 @@ function TestView() {
           variant="contained"
           color="inherit"
           startIcon={<Iconify icon="mingcute:add-line" />}
+          onClick={() => navigate('/test/create')}
         >
           New Test
         </Button>

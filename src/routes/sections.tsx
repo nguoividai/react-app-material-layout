@@ -25,6 +25,7 @@ export const Pos = lazy(() => import('src/pages/pos'));
 export const Dishes = lazy(() => import('src/pages/dishes'));
 export const ManageTable = lazy(() => import('src/pages/manage-table'));
 export const TestPage = lazy(() => import('src/pages/test'));
+export const TestCreatePage = lazy(() => import('src/pages/test-create'));
 
 export const General = lazy(() => import('src/pages/app/detail/general'));
 export const SEO = lazy(() => import('src/pages/app/detail/seo'));
@@ -67,6 +68,7 @@ export function Router() {
         { element: <HomePage />, index: true },
         { path: 'user', element: <UserPage /> },
         { path: 'test', element: <TestPage /> },
+        { path: 'test/create', element: <TestCreatePage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'apps', element: <AppPage /> },
