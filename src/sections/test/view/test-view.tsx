@@ -1,12 +1,14 @@
-import faker from 'faker';
-
 import React, { useMemo, useState } from 'react';
+
+import faker from 'faker';
 
 import { GridColDef } from '@mui/x-data-grid';
 
 import ListView from 'src/components/list-view';
 
 import useTable from 'src/hooks/use-table';
+import { Button } from '@mui/material';
+import { Iconify } from 'src/components/iconify';
 
 const generateData = () => {
   const data = [];
@@ -89,11 +91,22 @@ function TestView() {
       pageSize={table.rowsPerPage}
       page={table.page}
       selected={table.selected}
+      filterElement={<>Test</>}
+      headActions={
+        <Button
+          variant="contained"
+          color="inherit"
+          startIcon={<Iconify icon="mingcute:add-line" />}
+        >
+          New Test
+        </Button>
+      }
       onChangeSearch={(value) => setSearchValue(value)}
-      onDeleteMultiple={onDeleteMultiple}
       onChangePage={table.onChangePage}
       onSelectAllRows={table.onSelectAllRows}
       onResetPage={table.onResetPage}
+      onChangeRowsPerPage={table.onChangeRowsPerPage}
+      onDeleteMultiple={onDeleteMultiple}
     />
   );
 }

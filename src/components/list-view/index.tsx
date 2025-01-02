@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import TablePagination from '@mui/material/TablePagination';
 
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 import { DashboardContent } from 'src/layouts/dashboard';
 
@@ -23,6 +24,7 @@ type ListViewProps = {
   readonly pageSize?: number;
   readonly page?: number;
   readonly selected?: string[] | number[];
+  readonly filterElement?: React.ReactNode;
   readonly onChangeSearch?: (value?: string) => void;
   readonly onChangePage?: (event: unknown, newPage: number) => void;
   readonly onDeleteMultiple?: () => void;
@@ -41,6 +43,7 @@ function ListView({
   pageSize = 0,
   page = 1,
   selected = [],
+  filterElement,
   onChangeSearch = () => {},
   onChangePage = () => {},
   onDeleteMultiple = () => {},
@@ -48,6 +51,12 @@ function ListView({
   onChangeRowsPerPage = () => {},
   onResetPage = () => {},
 }: ListViewProps) {
+  const theme = useTheme();
+
+  const isLgDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const isXlUp = useMediaQuery(theme.breakpoints.up('xl'));
+  const heightTable = useMemo(() => (isXlUp ? 600 : isLgDown ? 500 : 400), [isXlUp, isLgDown]);
+
   return (
     <DashboardContent>
       <Box display="flex" alignItems="center" mb={5}>
@@ -61,6 +70,7 @@ function ListView({
         <TableToolbar
           numSelected={selected.length}
           filterName={searchValue}
+          filterElement={filterElement}
           onSearch={(event: any) => {
             onChangeSearch?.(event.target.value);
             onResetPage();
@@ -70,7 +80,7 @@ function ListView({
 
         <Box
           sx={{
-            height: 400,
+            height: heightTable,
             width: '100%',
             '& .MuiDataGrid-root': {
               border: 0,

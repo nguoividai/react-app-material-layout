@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import React, { memo, useRef } from 'react';
 
 import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,24 +11,38 @@ import useModal from 'src/hooks/use-modal';
 
 import { Iconify } from 'src/components/iconify';
 
+import { Badge, Box, Divider, Drawer, Stack } from '@mui/material';
+
 import ConfirmDialog from '../dialog/confirm-dialog';
+import { Scrollbar } from '../scrollbar';
 
 // ----------------------------------------------------------------------
 
 type TableToolbarProps = {
   readonly numSelected: number;
   readonly filterName: string;
+  readonly canReset?: boolean;
+  readonly filterElement?: React.ReactNode;
   readonly onSearch?: (event: any) => void;
   readonly onDeleteMultiple?: () => void;
+  readonly onResetFilter?: () => void;
 };
 
 function TableToolbar({
   numSelected,
   filterName,
-  onSearch,
+  filterElement,
+  canReset = false,
+  onSearch = () => {},
   onDeleteMultiple = () => {},
+  onResetFilter = () => {},
 }: TableToolbarProps) {
   const { open, handleShow, handleClose } = useModal();
+  const {
+    open: openFilter,
+    handleShow: handleShowFilter,
+    handleClose: handleCloseFilter,
+  } = useModal();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -80,15 +94,54 @@ function TableToolbar({
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton>
-              <Iconify icon="ic:round-filter-list" />
-            </IconButton>
-          </Tooltip>
+          !!filterElement && (
+            <Tooltip title="Filter list">
+              <IconButton onClick={handleShowFilter}>
+                <Iconify icon="ic:round-filter-list" />
+              </IconButton>
+            </Tooltip>
+          )
         )}
       </Toolbar>
 
       <ConfirmDialog open={open} handleClose={handleClose} handleSubmit={onDeleteMultiple} />
+
+      <Drawer anchor="right" open={openFilter} onClose={handleCloseFilter}>
+        <Box sx={{ width: 280 }}>
+          <Box display="flex" alignItems="center" sx={{ pl: 2.5, pr: 1.5, py: 2 }}>
+            <Typography variant="h6" flexGrow={1}>
+              Filters
+            </Typography>
+
+            <Tooltip title="Reset">
+              <IconButton
+                onClick={() => {
+                  onResetFilter();
+                  handleCloseFilter();
+                }}
+              >
+                <Badge color="error" variant="dot" invisible={!canReset}>
+                  <Iconify icon="solar:refresh-linear" />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Close filter">
+              <IconButton onClick={handleCloseFilter}>
+                <Iconify icon="mingcute:close-line" />
+              </IconButton>
+            </Tooltip>
+          </Box>
+
+          <Divider />
+
+          <Scrollbar>
+            <Stack spacing={3} sx={{ p: 3 }}>
+              {filterElement}
+            </Stack>
+          </Scrollbar>
+        </Box>
+      </Drawer>
     </>
   );
 }
