@@ -11,7 +11,7 @@ import useModal from 'src/hooks/use-modal';
 
 import { Iconify } from 'src/components/iconify';
 
-import { Badge, Box, Divider, Drawer, Stack } from '@mui/material';
+import { Badge, Box, Button, Divider, Drawer, Stack } from '@mui/material';
 
 import ConfirmDialog from '../dialog/confirm-dialog';
 import { Scrollbar } from '../scrollbar';
@@ -26,6 +26,7 @@ type TableToolbarProps = {
   readonly onSearch?: (event: any) => void;
   readonly onDeleteMultiple?: () => void;
   readonly onResetFilter?: () => void;
+  readonly onFilter?: () => void;
 };
 
 function TableToolbar({
@@ -36,6 +37,7 @@ function TableToolbar({
   onSearch = () => {},
   onDeleteMultiple = () => {},
   onResetFilter = () => {},
+  onFilter = () => {},
 }: TableToolbarProps) {
   const { open, handleShow, handleClose } = useModal();
   const {
@@ -136,10 +138,31 @@ function TableToolbar({
           <Divider />
 
           <Scrollbar>
-            <Stack spacing={3} sx={{ p: 3 }}>
+            <Stack spacing={3} sx={{ p: 3, height: 'calc(100vh - 130px)', overflow: 'auto' }}>
               {filterElement}
             </Stack>
           </Scrollbar>
+
+          <Box
+            display="flex"
+            justifyContent="end"
+            sx={{
+              p: 1.5,
+              borderTop: '1px solid #ededed',
+              height: 'auto',
+              backgroundColor: '#fefefe',
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={() => {
+                onFilter();
+                handleCloseFilter();
+              }}
+            >
+              Filter
+            </Button>
+          </Box>
         </Box>
       </Drawer>
     </>

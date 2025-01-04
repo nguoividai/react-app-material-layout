@@ -104,6 +104,7 @@ function TestView() {
           New Test
         </Button>
       }
+      breadcrumbs={[{ title: 'Dashboard', route: '/' }, { title: 'Test' }]}
       onChangeSearch={(value) => setSearchValue(value)}
       onChangePage={table.onChangePage}
       onSelectAllRows={table.onSelectAllRows}

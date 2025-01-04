@@ -11,12 +11,14 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import TableToolbar from './table-toolbar';
+import Breadcrumb from '../breadcrumb';
+import { BreadcrumbType } from '../breadcrumb/types';
 
 // ----------------------------------------------------------------------
 
 type ListViewProps = {
   readonly data?: any;
-  readonly columns?: readonly GridColDef<R>[];
+  readonly columns?: readonly GridColDef[];
   readonly title?: string;
   readonly headActions?: React.ReactNode;
   readonly searchValue?: string;
@@ -25,12 +27,14 @@ type ListViewProps = {
   readonly page?: number;
   readonly selected?: string[] | number[];
   readonly filterElement?: React.ReactNode;
+  readonly breadcrumbs?: BreadcrumbType[];
   readonly onChangeSearch?: (value?: string) => void;
   readonly onChangePage?: (event: unknown, newPage: number) => void;
   readonly onDeleteMultiple?: () => void;
   readonly onSelectAllRows?: (checked: boolean, newSelectedList: string[]) => void;
   readonly onChangeRowsPerPage?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   readonly onResetPage?: () => void;
+  readonly onFilter?: () => void;
 };
 
 function ListView({
@@ -44,27 +48,31 @@ function ListView({
   page = 1,
   selected = [],
   filterElement,
+  breadcrumbs = [],
   onChangeSearch = () => {},
   onChangePage = () => {},
   onDeleteMultiple = () => {},
   onSelectAllRows = () => {},
   onChangeRowsPerPage = () => {},
   onResetPage = () => {},
+  onFilter = () => {},
 }: ListViewProps) {
   const theme = useTheme();
 
   const isLgDown = useMediaQuery(theme.breakpoints.down('lg'));
   const isXlUp = useMediaQuery(theme.breakpoints.up('xl'));
-  const heightTable = useMemo(() => (isXlUp ? 600 : isLgDown ? 500 : 400), [isXlUp, isLgDown]);
+  const heightTable = useMemo(() => (isXlUp ? 550 : isLgDown ? 500 : 400), [isXlUp, isLgDown]);
 
   return (
     <DashboardContent>
-      <Box display="flex" alignItems="center" mb={5}>
+      <Box display="flex" alignItems="center" mb={!breadcrumbs.length ? 5 : 0}>
         <Typography variant="h4" flexGrow={1}>
           {title}
         </Typography>
         {headActions}
       </Box>
+
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <Card>
         <TableToolbar
@@ -76,6 +84,7 @@ function ListView({
             onResetPage();
           }}
           onDeleteMultiple={onDeleteMultiple}
+          onFilter={onFilter}
         />
 
         <Box

@@ -138,7 +138,7 @@ const AppCreateLayout = () => {
               </Grid>
             </Grid>
           </CardContent>
-          <CardActions sx={{ display: 'flex', justifyContent: 'end', pt: 3, pb: 2 }}>
+          <CardActions sx={{ display: 'flex', justifyContent: 'end', p: 2, mt: 5 }}>
             <Button variant="contained">Create a new app</Button>
           </CardActions>
         </Card>
